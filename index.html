@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://github.com/confelipe.png">
+  <link rel="icon" type="image/png" href="avatar.png">
   
   <link rel="stylesheet" href="style.css">
 </head>
@@ -37,6 +37,8 @@
         <a href="#about" class="nav-item">Sobre</a>
         <a href="#skills" class="nav-item">Competências</a>
         <a href="#experience" class="nav-item">Experiência</a>
+        <a href="#projects" class="nav-item">Repositórios</a>
+        <a href="#articles" class="nav-item">Artigos</a>
         <a href="#education" class="nav-item">Formação</a>
         <a href="#contact" class="nav-item">Contato</a>
       </nav>
@@ -114,7 +116,7 @@
         <div class="hero-media">
           <div class="avatar-card">
             <div class="avatar-glow"></div>
-            <img src="https://github.com/confelipe.png" alt="Carlos Felipe Oliveira da Silva" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Carlos+Felipe&background=3b82f6&color=fff&size=256'">
+            <img src="avatar.png" alt="Carlos Felipe Oliveira da Silva" class="avatar-img" id="userAvatar">
             
             <div class="floating-badge badge-top">
               <i class="fa-solid fa-certificate"></i>
@@ -486,6 +488,137 @@
       </div>
     </section>
 
+    <!-- Repositories & Open Source Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Código Aberto &amp; Portfólio</span>
+          <h2 class="section-title">Repositórios no GitHub</h2>
+          <p class="section-description">
+            Projetos públicos, automações, decoders e ferramentas desenvolvidas para comunidade e infraestrutura corporativa.
+          </p>
+        </div>
+
+        <div class="repo-controls">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="repoSearchInput" placeholder="Buscar repositório por nome ou tecnologia...">
+          </div>
+          <a href="https://github.com/confelipe?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-github"></i>
+            <span>Ver no GitHub</span>
+          </a>
+        </div>
+
+        <!-- Dynamic Repos Container -->
+        <div class="repos-grid" id="reposGrid">
+          <div class="repo-card-skeleton">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line desc"></div>
+            <div class="skeleton-line meta"></div>
+          </div>
+          <div class="repo-card-skeleton">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line desc"></div>
+            <div class="skeleton-line meta"></div>
+          </div>
+          <div class="repo-card-skeleton">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line desc"></div>
+            <div class="skeleton-line meta"></div>
+          </div>
+        </div>
+
+        <div class="repo-stats-footer">
+          <span><i class="fa-solid fa-circle-nodes"></i> Sincronizado dinamicamente via GitHub API</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles & Technical Publications Section -->
+    <section class="section bg-alt" id="articles">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Conhecimento &amp; Prática</span>
+          <h2 class="section-title">Artigos &amp; Publicações Técnicas</h2>
+          <p class="section-description">
+            Estudos de caso, metodologias aplicadas e padrões de engenharia de confiabilidade e segurança da informação.
+          </p>
+        </div>
+
+        <div class="articles-grid">
+          <!-- Article 1 -->
+          <article class="article-card">
+            <div class="article-meta">
+              <span class="article-badge badge-sec"><i class="fa-solid fa-shield-virus"></i> Cybersecurity &amp; SOC</span>
+              <span class="article-date"><i class="fa-regular fa-clock"></i> 7 min de leitura</span>
+            </div>
+            <h3 class="article-title">Implementando SIEM Corporativo com Wazuh, Suricata IDS e CrowdSec</h3>
+            <p class="article-excerpt">
+              Como unificar decoders e regras customizadas, análise de tráfego de rede e inteligência distribuída de ameaças para atender requisitos rigorosos da ISO 27001 e PCI-DSS.
+            </p>
+            <div class="article-footer">
+              <div class="article-tags">
+                <span>#SIEM</span>
+                <span>#Wazuh</span>
+                <span>#Suricata</span>
+              </div>
+              <button class="read-article-btn" data-article="siem">
+                <span>Ler Artigo</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="article-card">
+            <div class="article-meta">
+              <span class="article-badge badge-devops"><i class="fa-solid fa-users-gear"></i> Automação &amp; Identidade</span>
+              <span class="article-date"><i class="fa-regular fa-clock"></i> 5 min de leitura</span>
+            </div>
+            <h3 class="article-title">Automação Segura de Identidade no Active Directory com TypeScript e APIs</h3>
+            <p class="article-excerpt">
+              Arquitetura de middleware para operações de identidade em múltiplos Domain Controllers (desbloqueio e reset), com testes automatizados e esteira de auditoria NIST.
+            </p>
+            <div class="article-footer">
+              <div class="article-tags">
+                <span>#ActiveDirectory</span>
+                <span>#TypeScript</span>
+                <span>#APIs</span>
+              </div>
+              <button class="read-article-btn" data-article="identity">
+                <span>Ler Artigo</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="article-card">
+            <div class="article-meta">
+              <span class="article-badge badge-cloud"><i class="fa-solid fa-network-wired"></i> Infraestrutura &amp; Resiliência</span>
+              <span class="article-date"><i class="fa-regular fa-clock"></i> 6 min de leitura</span>
+            </div>
+            <h3 class="article-title">Arquitetura de Alta Disponibilidade (HA) com F5 BIG-IP e Docker Swarm</h3>
+            <p class="article-excerpt">
+              Estratégias práticas que resultaram em redução de 90% no tempo de recuperação (MTTR), eliminação de pontos únicos de falha e failover contínuo para aplicações críticas.
+            </p>
+            <div class="article-footer">
+              <div class="article-tags">
+                <span>#HighAvailability</span>
+                <span>#F5BIGIP</span>
+                <span>#DockerSwarm</span>
+              </div>
+              <button class="read-article-btn" data-article="ha">
+                <span>Ler Artigo</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- Education & Certifications Section -->
     <section class="section" id="education">
       <div class="container">
@@ -652,6 +785,22 @@
       </div>
     </div>
   </footer>
+
+  <!-- Article Reader Modal -->
+  <div class="modal-backdrop" id="articleModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <span class="modal-badge" id="modalBadge"></span>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Fechar artigo">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
 
   <!-- Toast Notification for Copying -->
   <div id="toast" class="toast">E-mail copiado para a área de transferência!</div>
