@@ -7,12 +7,12 @@
   <meta name="description" content="Engenharia de segurança de e-mails com Mailguard: automação em Python, hardening de Postfix MTA, validação estrita de SPF, DKIM e DMARC e mitigação de phishing.">
   <meta name="author" content="Carlos Felipe Oliveira da Silva">
   <meta name="keywords" content="Mailguard, Postfix, DMARC, DKIM, SPF, Email Security, Python, Antispam, SOC, Carlos Felipe">
-  <link rel="canonical" href="https://cfelipe.com.br/artigo-mailguard.html">
+  <link rel="canonical" href="https://cfelipe.com.br/artigos/mailguard">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="Mailguard: Proteção e Monitoramento de Fluxo de E-mails Corporativos">
   <meta property="og:description" content="Como arquitetar uma esteira de segurança para servidores de e-mail Postfix com validação DMARC, análise de reputação e automações defensivas em Python.">
-  <meta property="og:url" content="https://cfelipe.com.br/artigo-mailguard.html">
+  <meta property="og:url" content="https://cfelipe.com.br/artigos/mailguard">
   <meta property="og:image" content="https://cfelipe.com.br/avatar.png">
   
   <meta name="twitter:card" content="summary_large_image">
@@ -38,7 +38,7 @@
     },
     "datePublished": "2026-02-22",
     "inLanguage": "pt-BR",
-    "mainEntityOfPage": "https://cfelipe.com.br/artigo-mailguard.html",
+    "mainEntityOfPage": "https://cfelipe.com.br/artigos/mailguard",
     "keywords": ["Mailguard", "Postfix", "SPF", "DKIM", "DMARC", "Email Security", "Python"]
   }
   </script>
@@ -47,14 +47,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="icon" type="image/png" href="avatar.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="/avatar.png">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-container">
       <div class="header-top-row">
-        <a href="index.html" class="brand">
+        <a href="/" class="brand">
           <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
         </a>
 
@@ -69,14 +69,14 @@
       </div>
 
       <nav class="nav-links" id="navLinks">
-        <a href="index.html#about" class="nav-item">Sobre</a>
-        <a href="index.html#skills" class="nav-item">Competências</a>
-        <a href="index.html#architecture" class="nav-item">Arquiteturas</a>
-        <a href="index.html#experience" class="nav-item">Experiência</a>
-        <a href="repositorios.html" class="nav-item">Repositórios</a>
-        <a href="artigos.html" class="nav-item active-page">Artigos</a>
-        <a href="index.html#education" class="nav-item">Formação</a>
-        <a href="index.html#contact" class="nav-item">Contato</a>
+        <a href="/#about" class="nav-item">Sobre</a>
+        <a href="/#skills" class="nav-item">Competências</a>
+        <a href="/#architecture" class="nav-item">Arquiteturas</a>
+        <a href="/#experience" class="nav-item">Experiência</a>
+        <a href="/repositorios" class="nav-item">Repositórios</a>
+        <a href="/artigos" class="nav-item active-page">Artigos</a>
+        <a href="/#education" class="nav-item">Formação</a>
+        <a href="/#contact" class="nav-item">Contato</a>
       </nav>
     </div>
   </header>
@@ -85,7 +85,7 @@
     <section class="article-hero">
       <div class="container article-container">
         <div class="breadcrumb">
-          <a href="artigos.html"><i class="fa-solid fa-arrow-left"></i> Voltar para Todos os Artigos</a>
+          <a href="/artigos"><i class="fa-solid fa-arrow-left"></i> Voltar para Todos os Artigos</a>
           <span class="breadcrumb-separator">/</span>
           <span>Segurança de E-mail &amp; MTA</span>
         </div>
@@ -104,7 +104,7 @@
 
         <div class="author-meta-bar">
           <div class="author-avatar-group">
-            <img src="avatar.png" alt="Carlos Felipe" class="author-mini-img">
+            <img src="/avatar.png" alt="Carlos Felipe" class="author-mini-img">
             <div>
               <span class="author-name">Carlos Felipe Oliveira da Silva</span>
               <span class="author-role">Senior Infrastructure &amp; DevOps Engineer</span>
@@ -114,10 +114,10 @@
             <button class="btn btn-sm btn-outline" id="copyArticleLink" title="Copiar link do artigo">
               <i class="fa-solid fa-link"></i> <span>Copiar Link</span>
             </button>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://cfelipe.com.br/artigo-mailguard.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no LinkedIn">
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://cfelipe.com.br/artigos/mailguard" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no LinkedIn">
               <i class="fa-brands fa-linkedin-in"></i>
             </a>
-            <a href="https://api.whatsapp.com/send?text=Confira%20este%20artigo:%20Mailguard%20Seguranca%20de%20Emails%20https://cfelipe.com.br/artigo-mailguard.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no WhatsApp">
+            <a href="https://api.whatsapp.com/send?text=Confira%20este%20artigo:%20Mailguard%20Seguranca%20de%20Emails%20https://cfelipe.com.br/artigos/mailguard" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no WhatsApp">
               <i class="fa-brands fa-whatsapp"></i>
             </a>
           </div>
@@ -206,7 +206,7 @@ def verify_domain_alignment(domain, sender_ip):
 
         <aside class="article-author-card">
           <div class="author-card-content">
-            <img src="avatar.png" alt="Carlos Felipe" class="author-large-img">
+            <img src="/avatar.png" alt="Carlos Felipe" class="author-large-img">
             <div class="author-bio-wrap">
               <h3>Carlos Felipe Oliveira da Silva</h3>
               <p class="author-summary">
@@ -219,7 +219,7 @@ def verify_domain_alignment(domain, sender_ip):
                 <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
                   <i class="fa-brands fa-github"></i> GitHub
                 </a>
-                <a href="artigos.html" class="btn btn-sm btn-outline">
+                <a href="/artigos" class="btn btn-sm btn-outline">
                   <i class="fa-solid fa-book-open"></i> Ver Outros Artigos
                 </a>
               </div>
@@ -235,7 +235,7 @@ def verify_domain_alignment(domain, sender_ip):
     <div class="container footer-grid">
       <!-- Coluna 1: Marca & Tagline -->
       <div class="footer-col-brand">
-        <a href="index.html" class="brand">
+        <a href="/" class="brand">
           <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
         </a>
         <p class="footer-tagline">
@@ -247,13 +247,13 @@ def verify_domain_alignment(domain, sender_ip):
       <div class="footer-col-nav">
         <h4 class="footer-heading">Navegação</h4>
         <div class="footer-nav-links">
-          <a href="index.html#about"><i class="fa-solid fa-angle-right"></i> Sobre</a>
-          <a href="index.html#skills"><i class="fa-solid fa-angle-right"></i> Competências</a>
-          <a href="index.html#architecture"><i class="fa-solid fa-angle-right"></i> Arquiteturas</a>
-          <a href="index.html#experience"><i class="fa-solid fa-angle-right"></i> Experiência</a>
-          <a href="repositorios.html"><i class="fa-solid fa-angle-right"></i> Repositórios</a>
-          <a href="artigos.html"><i class="fa-solid fa-angle-right"></i> Artigos</a>
-          <a href="index.html#contact"><i class="fa-solid fa-angle-right"></i> Contato</a>
+          <a href="/#about"><i class="fa-solid fa-angle-right"></i> Sobre</a>
+          <a href="/#skills"><i class="fa-solid fa-angle-right"></i> Competências</a>
+          <a href="/#architecture"><i class="fa-solid fa-angle-right"></i> Arquiteturas</a>
+          <a href="/#experience"><i class="fa-solid fa-angle-right"></i> Experiência</a>
+          <a href="/repositorios"><i class="fa-solid fa-angle-right"></i> Repositórios</a>
+          <a href="/artigos"><i class="fa-solid fa-angle-right"></i> Artigos</a>
+          <a href="/#contact"><i class="fa-solid fa-angle-right"></i> Contato</a>
         </div>
       </div>
 
@@ -286,6 +286,6 @@ def verify_domain_alignment(domain, sender_ip):
   </footer>
 
   <div id="toast" class="toast"></div>
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>
