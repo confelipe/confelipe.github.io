@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repositórios Públicos | Carlos Felipe</title>
+  <meta name="description" content="Catálogo completo de repositórios públicos e projetos open source de Carlos Felipe Oliveira da Silva.">
+  <meta name="author" content="Carlos Felipe Oliveira da Silva">
+  <meta property="og:title" content="Repositórios Públicos | Carlos Felipe">
+  <meta property="og:description" content="Explore projetos, automações, decoders e ferramentas de infraestrutura e segurança da informação.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://confelipe.github.io/repositorios.html">
+  <meta property="og:image" content="https://confelipe.github.io/avatar.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="avatar.png">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand">
+        <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">Início</a>
+        <a href="index.html#about" class="nav-item">Sobre</a>
+        <a href="index.html#skills" class="nav-item">Competências</a>
+        <a href="index.html#experience" class="nav-item">Experiência</a>
+        <a href="repositorios.html" class="nav-item active-page">Repositórios</a>
+        <a href="artigos.html" class="nav-item">Artigos</a>
+        <a href="index.html#education" class="nav-item">Formação</a>
+        <a href="index.html#contact" class="nav-item">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <a href="curriculo-carlos-felipe.pdf" download class="btn btn-outline cv-btn" title="Baixar Currículo em PDF">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Download CV</span>
+        </a>
+        <button class="mobile-toggle icon-btn" id="mobileToggle" aria-label="Abrir menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Voltar ao Currículo Principal</a>
+        </div>
+        <div class="section-badge"><i class="fa-brands fa-github"></i> Código Aberto &amp; GitHub</div>
+        <h1 class="page-title">Repositórios Públicos</h1>
+        <p class="page-description">
+          Coleção completa de ferramentas, scripts de automação, decoders de segurança e microsserviços desenvolvidos com foco em ambientes reais e infraestrutura de alta confiabilidade.
+        </p>
+
+        <div class="repo-privacy-notice">
+          <i class="fa-solid fa-shield-check"></i>
+          <span><strong>Privacidade ativa:</strong> Apenas repositórios com visibilidade pública são sincronizados. Novos repositórios públicos criados no GitHub aparecerão aqui automaticamente.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Repos Filter & Grid Section -->
+    <section class="section" style="padding-top: 2rem;">
+      <div class="container">
+        <div class="repo-filter-bar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="repoSearchInput" placeholder="Pesquisar repositório por nome, tecnologia ou assunto...">
+          </div>
+
+          <div class="repo-lang-filters" id="repoLangFilters">
+            <button class="filter-btn active" data-lang="all">Todos</button>
+            <button class="filter-btn" data-lang="Python">Python</button>
+            <button class="filter-btn" data-lang="Go">Go</button>
+            <button class="filter-btn" data-lang="JavaScript">JavaScript</button>
+            <button class="filter-btn" data-lang="Shell">Shell / Bash</button>
+          </div>
+        </div>
+
+        <div class="repo-results-info">
+          <span id="repoCountText"><i class="fa-solid fa-spinner fa-spin"></i> Carregando repositórios do GitHub...</span>
+          <a href="https://github.com/confelipe?tab=repositories" target="_blank" rel="noopener noreferrer" class="external-github-link">
+            <span>Abrir GitHub Oficial</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
+        <!-- Grid Container -->
+        <div class="repos-grid" id="reposGrid">
+          <div class="repo-card-skeleton">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line desc"></div>
+            <div class="skeleton-line meta"></div>
+          </div>
+          <div class="repo-card-skeleton">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line desc"></div>
+            <div class="skeleton-line meta"></div>
+          </div>
+          <div class="repo-card-skeleton">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line desc"></div>
+            <div class="skeleton-line meta"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <p>&copy; <span id="currentYear"></span> Carlos Felipe Oliveira da Silva. Hospedado com carinho no <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.</p>
+      <div class="footer-links">
+        <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="mailto:cfelipe.oliveiradasilva@gmail.com" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

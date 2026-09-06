@@ -37,8 +37,8 @@
         <a href="#about" class="nav-item">Sobre</a>
         <a href="#skills" class="nav-item">Competências</a>
         <a href="#experience" class="nav-item">Experiência</a>
-        <a href="#projects" class="nav-item">Repositórios</a>
-        <a href="#articles" class="nav-item">Artigos</a>
+        <a href="repositorios.html" class="nav-item">Repositórios</a>
+        <a href="artigos.html" class="nav-item">Artigos</a>
         <a href="#education" class="nav-item">Formação</a>
         <a href="#contact" class="nav-item">Contato</a>
       </nav>
@@ -488,61 +488,114 @@
       </div>
     </section>
 
-    <!-- Repositories & Open Source Projects Section -->
+    <!-- Featured Repositories Showcase Section -->
     <section class="section" id="projects">
       <div class="container">
         <div class="section-header">
-          <span class="section-badge">Código Aberto &amp; Portfólio</span>
-          <h2 class="section-title">Repositórios no GitHub</h2>
+          <span class="section-badge">Código Aberto &amp; GitHub</span>
+          <h2 class="section-title">Repositórios em Destaque</h2>
           <p class="section-description">
-            Projetos públicos, automações, decoders e ferramentas desenvolvidas para comunidade e infraestrutura corporativa.
+            Ferramentas, automações e decoders open-source desenvolvidos para segurança e infraestrutura.
           </p>
         </div>
 
-        <div class="repo-controls">
-          <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="repoSearchInput" placeholder="Buscar repositório por nome ou tecnologia...">
+        <div class="repos-grid">
+          <!-- Featured Repo 1: kaspersky_wazuh -->
+          <div class="repo-card">
+            <div class="repo-header">
+              <div class="repo-title-wrap">
+                <i class="fa-regular fa-folder-closed"></i>
+                <a href="https://github.com/confelipe/kaspersky_wazuh" target="_blank" rel="noopener noreferrer" class="repo-name">
+                  kaspersky_wazuh
+                </a>
+              </div>
+              <a href="https://github.com/confelipe/kaspersky_wazuh" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted);" title="Ver no GitHub">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+            <p class="repo-desc">Decoders e regras customizadas para integração avançada do Kaspersky Cloud Console com Wazuh SIEM e correlação de eventos.</p>
+            <div class="repo-footer">
+              <span class="repo-lang">
+                <span class="repo-lang-dot" style="background-color: #f87171"></span>
+                Wazuh / XML
+              </span>
+              <div class="repo-stats">
+                <span class="repo-stat-item"><i class="fa-regular fa-star"></i> 1</span>
+                <span class="repo-stat-item"><i class="fa-solid fa-code-fork"></i> 0</span>
+              </div>
+            </div>
           </div>
-          <a href="https://github.com/confelipe?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            <i class="fa-brands fa-github"></i>
-            <span>Ver no GitHub</span>
+
+          <!-- Featured Repo 2: CrowdSec-Hub -->
+          <div class="repo-card">
+            <div class="repo-header">
+              <div class="repo-title-wrap">
+                <i class="fa-regular fa-folder-closed"></i>
+                <a href="https://github.com/confelipe/CrowdSec-Hub" target="_blank" rel="noopener noreferrer" class="repo-name">
+                  CrowdSec-Hub
+                </a>
+              </div>
+              <a href="https://github.com/confelipe/CrowdSec-Hub" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted);" title="Ver no GitHub">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+            <p class="repo-desc">Coleções de bouncers, parsers e cenários de detecção comportamental e mitigação ativa contra tráfego malicioso.</p>
+            <div class="repo-footer">
+              <span class="repo-lang">
+                <span class="repo-lang-dot" style="background-color: #f1e05a"></span>
+                JavaScript / Sec
+              </span>
+              <div class="repo-stats">
+                <span class="repo-stat-item"><i class="fa-regular fa-star"></i> 0</span>
+                <span class="repo-stat-item"><i class="fa-solid fa-code-fork"></i> 0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Repo 3: mailguard -->
+          <div class="repo-card">
+            <div class="repo-header">
+              <div class="repo-title-wrap">
+                <i class="fa-regular fa-folder-closed"></i>
+                <a href="https://github.com/confelipe/mailguard" target="_blank" rel="noopener noreferrer" class="repo-name">
+                  mailguard
+                </a>
+              </div>
+              <a href="https://github.com/confelipe/mailguard" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted);" title="Ver no GitHub">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+            <p class="repo-desc">Automação e monitoramento de segurança para tráfego de e-mails corporativos e políticas antispam com Python.</p>
+            <div class="repo-footer">
+              <span class="repo-lang">
+                <span class="repo-lang-dot" style="background-color: #3572A5"></span>
+                Python
+              </span>
+              <div class="repo-stats">
+                <span class="repo-stat-item"><i class="fa-regular fa-star"></i> 0</span>
+                <span class="repo-stat-item"><i class="fa-solid fa-code-fork"></i> 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-action">
+          <a href="repositorios.html" class="btn btn-primary">
+            <span>Ver Todos os Repositórios Públicos (22+)</span>
+            <i class="fa-solid fa-arrow-right"></i>
           </a>
-        </div>
-
-        <!-- Dynamic Repos Container -->
-        <div class="repos-grid" id="reposGrid">
-          <div class="repo-card-skeleton">
-            <div class="skeleton-line title"></div>
-            <div class="skeleton-line desc"></div>
-            <div class="skeleton-line meta"></div>
-          </div>
-          <div class="repo-card-skeleton">
-            <div class="skeleton-line title"></div>
-            <div class="skeleton-line desc"></div>
-            <div class="skeleton-line meta"></div>
-          </div>
-          <div class="repo-card-skeleton">
-            <div class="skeleton-line title"></div>
-            <div class="skeleton-line desc"></div>
-            <div class="skeleton-line meta"></div>
-          </div>
-        </div>
-
-        <div class="repo-stats-footer">
-          <span><i class="fa-solid fa-circle-nodes"></i> Sincronizado dinamicamente via GitHub API</span>
         </div>
       </div>
     </section>
 
-    <!-- Articles & Technical Publications Section -->
+    <!-- Featured Articles Showcase Section -->
     <section class="section bg-alt" id="articles">
       <div class="container">
         <div class="section-header">
           <span class="section-badge">Conhecimento &amp; Prática</span>
-          <h2 class="section-title">Artigos &amp; Publicações Técnicas</h2>
+          <h2 class="section-title">Artigos &amp; Publicações</h2>
           <p class="section-description">
-            Estudos de caso, metodologias aplicadas e padrões de engenharia de confiabilidade e segurança da informação.
+            Estudos de caso, metodologias aplicadas e padrões de engenharia de confiabilidade e defesa ativa.
           </p>
         </div>
 
@@ -563,10 +616,10 @@
                 <span>#Wazuh</span>
                 <span>#Suricata</span>
               </div>
-              <button class="read-article-btn" data-article="siem">
-                <span>Ler Artigo</span>
+              <a href="artigos.html#siem" class="read-article-btn">
+                <span>Ler Artigo Completo</span>
                 <i class="fa-solid fa-arrow-right"></i>
-              </button>
+              </a>
             </div>
           </article>
 
@@ -586,35 +639,19 @@
                 <span>#TypeScript</span>
                 <span>#APIs</span>
               </div>
-              <button class="read-article-btn" data-article="identity">
-                <span>Ler Artigo</span>
+              <a href="artigos.html#identity" class="read-article-btn">
+                <span>Ler Artigo Completo</span>
                 <i class="fa-solid fa-arrow-right"></i>
-              </button>
+              </a>
             </div>
           </article>
+        </div>
 
-          <!-- Article 3 -->
-          <article class="article-card">
-            <div class="article-meta">
-              <span class="article-badge badge-cloud"><i class="fa-solid fa-network-wired"></i> Infraestrutura &amp; Resiliência</span>
-              <span class="article-date"><i class="fa-regular fa-clock"></i> 6 min de leitura</span>
-            </div>
-            <h3 class="article-title">Arquitetura de Alta Disponibilidade (HA) com F5 BIG-IP e Docker Swarm</h3>
-            <p class="article-excerpt">
-              Estratégias práticas que resultaram em redução de 90% no tempo de recuperação (MTTR), eliminação de pontos únicos de falha e failover contínuo para aplicações críticas.
-            </p>
-            <div class="article-footer">
-              <div class="article-tags">
-                <span>#HighAvailability</span>
-                <span>#F5BIGIP</span>
-                <span>#DockerSwarm</span>
-              </div>
-              <button class="read-article-btn" data-article="ha">
-                <span>Ler Artigo</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-          </article>
+        <div class="showcase-action">
+          <a href="artigos.html" class="btn btn-secondary">
+            <span>Ver Todos os Artigos e Publicações Técnicas</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </section>
