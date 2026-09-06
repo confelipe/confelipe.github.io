@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alta Disponibilidade (HA) com F5 BIG-IP e Docker Swarm | Carlos Felipe</title>
+  <meta name="description" content="Engenharia de resiliência e alta disponibilidade: implementação de F5 BIG-IP em topologia HA, balanceamento inteligente e orquestração Docker Swarm com 90% de redução no MTTR.">
+  <meta name="author" content="Carlos Felipe Oliveira da Silva">
+  <meta name="keywords" content="F5 BIG-IP, Docker Swarm, Alta Disponibilidade, HA, Resiliência, MTTR, Load Balancing, DevOps, Carlos Felipe">
+  <link rel="canonical" href="https://confelipe.github.io/artigo-alta-disponibilidade.html">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Alta Disponibilidade (HA) com F5 BIG-IP e Docker Swarm">
+  <meta property="og:description" content="Estratégias práticas de balanceamento e failover inteligente que resultaram em redução de 90% no tempo de recuperação contra falhas.">
+  <meta property="og:url" content="https://confelipe.github.io/artigo-alta-disponibilidade.html">
+  <meta property="og:image" content="https://confelipe.github.io/avatar.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alta Disponibilidade (HA) com F5 BIG-IP e Docker Swarm">
+  <meta name="twitter:description" content="Arquitetura de missão crítica com F5 BIG-IP, Docker Swarm e eliminação de pontos únicos de falha.">
+  <meta name="twitter:image" content="https://confelipe.github.io/avatar.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Alta Disponibilidade (HA) com F5 BIG-IP e Docker Swarm",
+    "description": "Desenho de arquitetura de alta disponibilidade e resiliência com balanceadores F5 BIG-IP e clusters Docker Swarm.",
+    "author": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva",
+      "url": "https://confelipe.github.io",
+      "jobTitle": "Senior Infrastructure & DevOps Engineer"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva"
+    },
+    "datePublished": "2025-10-15",
+    "inLanguage": "pt-BR",
+    "mainEntityOfPage": "https://confelipe.github.io/artigo-alta-disponibilidade.html",
+    "keywords": ["F5BIGIP", "DockerSwarm", "HighAvailability", "Resiliencia", "DevOps"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="avatar.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand">
+        <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">Início</a>
+        <a href="index.html#about" class="nav-item">Sobre</a>
+        <a href="index.html#skills" class="nav-item">Competências</a>
+        <a href="index.html#experience" class="nav-item">Experiência</a>
+        <a href="repositorios.html" class="nav-item">Repositórios</a>
+        <a href="artigos.html" class="nav-item active-page">Artigos</a>
+        <a href="index.html#education" class="nav-item">Formação</a>
+        <a href="index.html#contact" class="nav-item">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <a href="curriculo-carlos-felipe.pdf" download class="btn btn-outline cv-btn" title="Baixar Currículo em PDF">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Download CV</span>
+        </a>
+        <button class="mobile-toggle icon-btn" id="mobileToggle" aria-label="Abrir menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container article-container">
+        <div class="breadcrumb">
+          <a href="artigos.html"><i class="fa-solid fa-arrow-left"></i> Voltar para Todos os Artigos</a>
+          <span class="breadcrumb-separator">/</span>
+          <span>Alta Disponibilidade &amp; Resiliência</span>
+        </div>
+
+        <div class="article-header-meta">
+          <span class="article-badge badge-cloud"><i class="fa-solid fa-network-wired"></i> Alta Disponibilidade &amp; Resiliência</span>
+          <span class="article-date"><i class="fa-regular fa-clock"></i> 6 min de leitura</span>
+          <span class="article-date"><i class="fa-regular fa-calendar"></i> Outubro 2025</span>
+        </div>
+
+        <h1 class="single-article-title">Arquitetura de Alta Disponibilidade (HA) com F5 BIG-IP e Docker Swarm</h1>
+        
+        <p class="single-article-subtitle">
+          Estratégias práticas que resultaram em redução de 90% no tempo de recuperação (MTTR), eliminação de pontos únicos de falha e failover contínuo para aplicações críticas.
+        </p>
+
+        <div class="author-meta-bar">
+          <div class="author-avatar-group">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-mini-img">
+            <div>
+              <span class="author-name">Carlos Felipe Oliveira da Silva</span>
+              <span class="author-role">Senior Infrastructure &amp; DevOps Engineer</span>
+            </div>
+          </div>
+          <div class="article-share-buttons">
+            <button class="btn btn-sm btn-outline" id="copyArticleLink" title="Copiar link do artigo">
+              <i class="fa-solid fa-link"></i> <span>Copiar Link</span>
+            </button>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://confelipe.github.io/artigo-alta-disponibilidade.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Confira%20este%20artigo:%20Alta%20Disponibilidade%20com%20F5%20BIG-IP%20https://confelipe.github.io/artigo-alta-disponibilidade.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section article-content-section">
+      <div class="container article-container">
+        <article class="single-article-content">
+          <div class="article-highlight-box">
+            <i class="fa-solid fa-diagram-project"></i>
+            <div>
+              <strong>Resiliência Sem Degradação:</strong> Em sistemas empresariais com milhares de transações simultâneas, tolerância a falhas significa que panes em servidores físicos ou instâncias de contêineres devem ser absorvidas sem desconectar os usuários nem interromper operações em andamento.
+            </div>
+          </div>
+
+          <h2>1. O Cenário: Eliminação de SPOF (Single Point of Failure)</h2>
+          <p>
+            Plataformas legadas frequentemente concentram todo o tráfego em um único gateway ou instância de proxy reverso. Quando ocorre uma falha de hardware ou esgotamento de conexões, toda a operação fica paralisada, resultando em perdas financeiras imediatas e violação de SLAs contratuais.
+          </p>
+
+          <h2>2. Topologia Active/Standby com F5 BIG-IP</h2>
+          <p>
+            A camada de borda e balanceamento de carga foi implementada com um par de appliances <strong>F5 BIG-IP LTM (Local Traffic Manager)</strong> configurados em cluster sincronizado:
+          </p>
+          <ul>
+            <li><strong>State Synchronization Contínua:</strong> A tabela de conexões e sessões de usuários é espelhada continuamente entre o nó ativo e o nó passivo via link de rede dedicado (ConfigSync &amp; Network Failover).</li>
+            <li><strong>Health Monitors Sintéticos:</strong> Em vez de simples testes de ping (ICMP), os monitores executam requisições HTTP simuladas que validam se a aplicação consegue consultar o banco de dados antes de direcionar o tráfego.</li>
+            <li><strong>SSL Offloading Otimizado:</strong> Terminação TLS acelerada por hardware no F5, descarregando os nós de aplicação e simplificando a renovação centralizada de certificados.</li>
+          </ul>
+
+          <h2>3. Orquestração com Docker Swarm e Auto-Healing</h2>
+          <p>
+            Na camada de microsserviços, o Docker Swarm foi estruturado em nós de gerenciamento e trabalhadores distribuídos em diferentes hipervisores VMware:
+          </p>
+
+          <pre><code># docker-stack.yml - Resiliência e auto-recuperação
+version: '3.8'
+services:
+  web_core:
+    image: app/core:latest
+    deploy:
+      replicas: 6
+      update_config:
+        parallelism: 2
+        delay: 15s
+        order: start-first
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s</code></pre>
+
+          <h2>4. Testes de Falha e Validação de Disaster Recovery</h2>
+          <p>
+            Foram executados testes de estresse e <em>Chaos Engineering</em> simulando a queda abrupta de um nó do F5 BIG-IP e o desligamento repentino de hosts físicos do Swarm:
+          </p>
+          <div class="article-steps-grid">
+            <div class="step-card">
+              <div class="step-icon"><i class="fa-solid fa-bolt"></i></div>
+              <h3>Failover Sub-Segundo</h3>
+              <p>O nó secundário do F5 assumiu o tráfego em menos de 400 milissegundos sem queda de conexões ativas.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+              <h3>Rebalanceamento Autônomo</h3>
+              <p>O Swarm reprogramou réplicas perdidas em nós saudáveis em menos de 10 segundos.</p>
+            </div>
+          </div>
+
+          <div class="article-callout success">
+            <h4><i class="fa-solid fa-trophy"></i> Resultado Estratégico</h4>
+            <p>
+              O tempo médio de recuperação (MTTR) foi reduzido em <strong>90%</strong>, assegurando <strong>99.99% de disponibilidade</strong> (alta resiliência) mesmo durante janelas de manutenção de infraestrutura.
+            </p>
+          </div>
+
+          <div class="article-tags-section">
+            <span class="tags-title">Tecnologias &amp; Tags:</span>
+            <div class="tags-list">
+              <span class="tag">#HighAvailability</span>
+              <span class="tag">#F5BIGIP</span>
+              <span class="tag">#DockerSwarm</span>
+              <span class="tag">#Failover</span>
+              <span class="tag">#ZeroDowntime</span>
+              <span class="tag">#Resiliência</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="article-author-card">
+          <div class="author-card-content">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-large-img">
+            <div class="author-bio-wrap">
+              <h3>Carlos Felipe Oliveira da Silva</h3>
+              <p class="author-summary">
+                Senior Infrastructure &amp; DevOps Engineer com sólida especialização em balanceamento de tráfego de alta criticidade, orquestração de contêineres e recuperação contra desastres.
+              </p>
+              <div class="author-links">
+                <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                  <i class="fa-brands fa-linkedin-in"></i> Conectar no LinkedIn
+                </a>
+                <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="artigos.html" class="btn btn-sm btn-outline">
+                  <i class="fa-solid fa-book-open"></i> Ver Outros Artigos
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+        </a>
+        <p class="footer-tagline">Conectando infraestrutura, segurança e código.</p>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:felipecarlos85@gmail.com" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Carlos Felipe Oliveira da Silva. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -4,14 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Repositórios Públicos | Carlos Felipe</title>
-  <meta name="description" content="Catálogo completo de repositórios públicos e projetos open source de Carlos Felipe Oliveira da Silva.">
+  <meta name="description" content="Catálogo completo de repositórios públicos, automações, ferramentas de infraestrutura e projetos open source de Carlos Felipe Oliveira da Silva.">
   <meta name="author" content="Carlos Felipe Oliveira da Silva">
+  <meta name="keywords" content="GitHub Repositories, Open Source, Python, Go, TypeScript, Shell, Wazuh, SIEM, Docker, Kubernetes, Carlos Felipe">
+  <link rel="canonical" href="https://confelipe.github.io/repositorios.html">
+  
   <meta property="og:title" content="Repositórios Públicos | Carlos Felipe">
   <meta property="og:description" content="Explore projetos, automações, decoders e ferramentas de infraestrutura e segurança da informação.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://confelipe.github.io/repositorios.html">
   <meta property="og:image" content="https://confelipe.github.io/avatar.png">
   
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Repositórios Públicos | Carlos Felipe">
+  <meta name="twitter:description" content="Explore projetos, automações e ferramentas de infraestrutura e segurança.">
+  <meta name="twitter:image" content="https://confelipe.github.io/avatar.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "headline": "Repositórios Públicos de Carlos Felipe",
+    "description": "Catálogo completo de código aberto e repositórios de automação e segurança por Carlos Felipe Oliveira da Silva.",
+    "author": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva",
+      "url": "https://confelipe.github.io"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva"
+    }
+  }
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,10 +46,7 @@
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="avatar.png">
-  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -74,7 +98,7 @@
 
         <div class="repo-privacy-notice">
           <i class="fa-solid fa-shield-check"></i>
-          <span><strong>Privacidade ativa:</strong> Apenas repositórios com visibilidade pública são sincronizados. Novos repositórios públicos criados no GitHub aparecerão aqui automaticamente.</span>
+          <span><strong>Privacidade ativa:</strong> Sincronização em tempo real via API do GitHub filtrando estritamente repositórios públicos (<code>private === false</code>). Novos repositórios criados aparecem automaticamente aqui.</span>
         </div>
       </div>
     </section>
@@ -92,6 +116,7 @@
             <button class="filter-btn active" data-lang="all">Todos</button>
             <button class="filter-btn" data-lang="Python">Python</button>
             <button class="filter-btn" data-lang="Go">Go</button>
+            <button class="filter-btn" data-lang="TypeScript">TypeScript</button>
             <button class="filter-btn" data-lang="JavaScript">JavaScript</button>
             <button class="filter-btn" data-lang="Shell">Shell / Bash</button>
           </div>
@@ -99,29 +124,14 @@
 
         <div class="repo-results-info">
           <span id="repoCountText"><i class="fa-solid fa-spinner fa-spin"></i> Carregando repositórios do GitHub...</span>
-          <a href="https://github.com/confelipe?tab=repositories" target="_blank" rel="noopener noreferrer" class="external-github-link">
-            <span>Abrir GitHub Oficial</span>
+          <a href="https://github.com/confelipe?tab=repositories" target="_blank" rel="noopener noreferrer" class="view-github-profile-link">
+            <span>Ver perfil no GitHub</span>
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
         </div>
 
-        <!-- Grid Container -->
         <div class="repos-grid" id="reposGrid">
-          <div class="repo-card-skeleton">
-            <div class="skeleton-line title"></div>
-            <div class="skeleton-line desc"></div>
-            <div class="skeleton-line meta"></div>
-          </div>
-          <div class="repo-card-skeleton">
-            <div class="skeleton-line title"></div>
-            <div class="skeleton-line desc"></div>
-            <div class="skeleton-line meta"></div>
-          </div>
-          <div class="repo-card-skeleton">
-            <div class="skeleton-line title"></div>
-            <div class="skeleton-line desc"></div>
-            <div class="skeleton-line meta"></div>
-          </div>
+          <!-- Dynamically populated via script.js -->
         </div>
       </div>
     </section>
@@ -130,15 +140,27 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-container">
-      <p>&copy; <span id="currentYear"></span> Carlos Felipe Oliveira da Silva.</p>
-      <div class="footer-links">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+        </a>
+        <p class="footer-tagline">Conectando infraestrutura, segurança e código.</p>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
         <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="mailto:cfelipe.oliveiradasilva@gmail.com" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+        <a href="mailto:felipecarlos85@gmail.com" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Carlos Felipe Oliveira da Silva. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
 
+  <div id="toast" class="toast"></div>
   <script src="script.js"></script>
 </body>
 </html>

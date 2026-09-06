@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrowdSec Hub: Defesa Ativa e Inteligência Colaborativa de Ameaças | Carlos Felipe</title>
+  <meta name="description" content="Engenharia de defesa cibernética: implantação do CrowdSec Hub, criação de parsers e cenários customizados, orquestração de bouncers e mitigação autônoma de ataques.">
+  <meta name="author" content="Carlos Felipe Oliveira da Silva">
+  <meta name="keywords" content="CrowdSec, Defesa Ativa, Threat Intelligence, SOC, Cybersecurity, Firewall Bouncers, Parsers, Nginx, Docker, Carlos Felipe">
+  <link rel="canonical" href="https://confelipe.github.io/artigo-crowdsec.html">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="CrowdSec Hub: Defesa Ativa e Inteligência Colaborativa de Ameaças">
+  <meta property="og:description" content="Como utilizar CrowdSec LAPI, parsers comportamentais e bouncers de borda para neutralizar ataques e varreduras maliciosas em tempo real.">
+  <meta property="og:url" content="https://confelipe.github.io/artigo-crowdsec.html">
+  <meta property="og:image" content="https://confelipe.github.io/avatar.png">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CrowdSec Hub: Defesa Ativa e Inteligência Colaborativa de Ameaças">
+  <meta name="twitter:description" content="Mitigação autônoma e inteligência distribuída de ameaças em infraestruturas corporativas.">
+  <meta name="twitter:image" content="https://confelipe.github.io/avatar.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "CrowdSec Hub: Defesa Ativa e Inteligência Colaborativa de Ameaças",
+    "description": "Arquitetura e implementação de segurança ativa com CrowdSec LAPI, bouncers em proxies reversos, parsers customizados e feeds de reputação de IP.",
+    "author": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva",
+      "url": "https://confelipe.github.io",
+      "jobTitle": "Senior Infrastructure & DevOps Engineer"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva"
+    },
+    "datePublished": "2026-02-18",
+    "inLanguage": "pt-BR",
+    "mainEntityOfPage": "https://confelipe.github.io/artigo-crowdsec.html",
+    "keywords": ["CrowdSec", "Cybersecurity", "Bouncers", "Threat Intelligence", "DevOps", "Docker", "Nginx"]
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="avatar.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand">
+        <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">Início</a>
+        <a href="index.html#about" class="nav-item">Sobre</a>
+        <a href="index.html#skills" class="nav-item">Competências</a>
+        <a href="index.html#experience" class="nav-item">Experiência</a>
+        <a href="repositorios.html" class="nav-item">Repositórios</a>
+        <a href="artigos.html" class="nav-item active-page">Artigos</a>
+        <a href="index.html#education" class="nav-item">Formação</a>
+        <a href="index.html#contact" class="nav-item">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <a href="curriculo-carlos-felipe.pdf" download class="btn btn-outline cv-btn" title="Baixar Currículo em PDF">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Download CV</span>
+        </a>
+        <button class="mobile-toggle icon-btn" id="mobileToggle" aria-label="Abrir menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container article-container">
+        <div class="breadcrumb">
+          <a href="artigos.html"><i class="fa-solid fa-arrow-left"></i> Voltar para Todos os Artigos</a>
+          <span class="breadcrumb-separator">/</span>
+          <span>Defesa Ativa &amp; Threat Intel</span>
+        </div>
+
+        <div class="article-header-meta">
+          <span class="article-badge badge-sec"><i class="fa-solid fa-shield-halved"></i> Cybersecurity &amp; Defesa Ativa</span>
+          <span class="article-date"><i class="fa-regular fa-clock"></i> 6 min de leitura</span>
+          <span class="article-date"><i class="fa-regular fa-calendar"></i> Fevereiro 2026</span>
+        </div>
+
+        <h1 class="single-article-title">CrowdSec Hub: Defesa Ativa e Inteligência Colaborativa de Ameaças</h1>
+        
+        <p class="single-article-subtitle">
+          Arquitetura distribuída de mitigação comportamental: como transformar logs de proxies e firewalls em decisões autônomas de bloqueio com bouncers e reputação global de IP.
+        </p>
+
+        <div class="author-meta-bar">
+          <div class="author-avatar-group">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-mini-img">
+            <div>
+              <span class="author-name">Carlos Felipe Oliveira da Silva</span>
+              <span class="author-role">Senior Infrastructure &amp; DevOps Engineer</span>
+            </div>
+          </div>
+          <div class="article-share-buttons">
+            <button class="btn btn-sm btn-outline" id="copyArticleLink" title="Copiar link do artigo">
+              <i class="fa-solid fa-link"></i> <span>Copiar Link</span>
+            </button>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://confelipe.github.io/artigo-crowdsec.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Confira%20este%20artigo:%20CrowdSec%20Hub%20Defesa%20Ativa%20https://confelipe.github.io/artigo-crowdsec.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section article-content-section">
+      <div class="container article-container">
+        <article class="single-article-content">
+          <div class="article-highlight-box">
+            <i class="fa-solid fa-shield-cat"></i>
+            <div>
+              <strong>Princípio Central:</strong> Defesa cooperativa em tempo real. Enquanto um IPS tradicional depende apenas de assinaturas estáticas locais, o CrowdSec analisa padrões de comportamento (leaky bucket) e compartilha inteligência de ameaças com uma rede global de sensores.
+            </div>
+          </div>
+
+          <h2>1. O Desafio: Ameaças Automatizadas e Scanners Silenciosos</h2>
+          <p>
+            Aplicações expostas à internet sofrem constantes varreduras automatizadas: port scans, força bruta em endpoints SSH/HTTP, crawling malicioso em busca de arquivos <code>.env</code> ou painéis de administração expostos. Bloquear manualmente esses IPs gera sobrecarga operacional e lentidão na resposta.
+          </p>
+
+          <h2>2. Arquitetura do CrowdSec Hub &amp; Camada LAPI</h2>
+          <p>
+            O CrowdSec foi estruturado de forma descentralizada na nossa infraestrutura:
+          </p>
+          <ul>
+            <li><strong>CrowdSec Agent (Parser Engine):</strong> Processa fluxos de logs de instâncias Nginx, Traefik, SSH e Syslog usando parsers YAML em alta velocidade.</li>
+            <li><strong>Local API (LAPI):</strong> Ponto central de decisão que recebe os alertas dos agentes, aplica a política de decisões (banimento temporário, captcha ou drop) e sincroniza a lista de bloqueios com os Bouncers.</li>
+            <li><strong>Bouncers (Remediation Components):</strong> Plugins integrados nos pontos de entrada (firewall nftables, Nginx Lua Bouncer e Cloudflare API) que barram o tráfego antes mesmo de consumir recursos da aplicação.</li>
+          </ul>
+
+          <h2>3. Criação de Cenários Customizados de Detecção</h2>
+          <p>
+            Para proteger portais internos e APIs corporativas contra raspagem indevida e abuso de rotas, criamos cenários baseados no algoritmo <em>leaky bucket</em>:
+          </p>
+
+          <pre><code># /etc/crowdsec/scenarios/custom-api-abuse.yaml
+type: leaky
+name: custom/api-aggressive-probing
+description: "Detecta requisicoes suspeitas em sequencia a rotas sensiveis"
+filter: "evt.Meta.log_type == 'http_access-log' && evt.Parsed.request contains '/api/v1/auth/'"
+leakspeed: "10s"
+capacity: 5
+groupby: "evt.Meta.source_ip"
+blackhole: 1m
+labels:
+  service: http
+  type: brute_force
+  remediation: true
+---
+# Decisão automatizada enviada ao LAPI
+duration: 4h
+scope: Ip
+reason: "Tentativa reiterada de enumeracao de credenciais"</code></pre>
+
+          <h2>4. Integração com Bouncers e Orquestração Docker</h2>
+          <p>
+            A implantação via Docker Compose integrou a LAPI aos proxies reversos da rede interna:
+          </p>
+
+          <pre><code># docker-compose.yml - CrowdSec Security Engine
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec_engine
+    environment:
+      - COLLECTIONS=crowdsecurity/linux crowdsecurity/nginx crowdsecurity/http-cve
+      - CUSTOM_HOSTNAME=crowdsec-hub
+    volumes:
+      - /var/log/nginx:/var/log/nginx:ro
+      - /var/log/auth.log:/var/log/auth.log:ro
+      - ./data:/var/lib/crowdsec/data
+      - ./config:/etc/crowdsec
+    restart: unless-stopped
+    networks:
+      - security_net</code></pre>
+
+          <div class="article-callout success">
+            <h4><i class="fa-solid fa-chart-line"></i> Impacto e Métricas Alcançadas</h4>
+            <p>
+              Com a ativação dos bouncers de borda, <strong>mais de 99% das tentativas de brute-force e scanning automatizado foram mitigadas em Camada 3/4</strong>, aliviando o consumo de CPU dos servidores de aplicação e zerando falsos positivos graças ao refinamento dos whitelists locais.
+            </p>
+          </div>
+
+          <div class="article-tags-section">
+            <span class="tags-title">Tecnologias &amp; Tags:</span>
+            <div class="tags-list">
+              <span class="tag">#CrowdSec</span>
+              <span class="tag">#Bouncers</span>
+              <span class="tag">#ThreatIntel</span>
+              <span class="tag">#Cybersecurity</span>
+              <span class="tag">#Nginx</span>
+              <span class="tag">#Docker</span>
+              <span class="tag">#DefesaAtiva</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="article-author-card">
+          <div class="author-card-content">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-large-img">
+            <div class="author-bio-wrap">
+              <h3>Carlos Felipe Oliveira da Silva</h3>
+              <p class="author-summary">
+                Senior Infrastructure &amp; DevOps Engineer com sólida atuação em resposta a incidentes, infraestrutura como código, SIEM e contenção ativa de ameaças.
+              </p>
+              <div class="author-links">
+                <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                  <i class="fa-brands fa-linkedin-in"></i> Conectar no LinkedIn
+                </a>
+                <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="artigos.html" class="btn btn-sm btn-outline">
+                  <i class="fa-solid fa-book-open"></i> Ver Outros Artigos
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+        </a>
+        <p class="footer-tagline">Conectando infraestrutura, segurança e código.</p>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:felipecarlos85@gmail.com" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Carlos Felipe Oliveira da Silva. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

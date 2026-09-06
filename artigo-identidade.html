@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automação Segura de Identidade no Active Directory com TypeScript | Carlos Felipe</title>
+  <meta name="description" content="Engenharia de software aplicada à gestão de identidade: desenvolvimento de middleware em TypeScript com LDAPS, 68+ testes automatizados e integração com Entra ID.">
+  <meta name="author" content="Carlos Felipe Oliveira da Silva">
+  <meta name="keywords" content="Active Directory, TypeScript, LDAPS, IAM, Zero Trust, Node.js, Microsoft Entra ID, DevOps, Carlos Felipe">
+  <link rel="canonical" href="https://confelipe.github.io/artigo-identidade.html">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Automação Segura de Identidade no Active Directory com TypeScript">
+  <meta property="og:description" content="Como orquestrar operações críticas de identidade no AD (desbloqueio, reset de credenciais) via middleware resiliente em TypeScript com LDAPS e testes automatizados.">
+  <meta property="og:url" content="https://confelipe.github.io/artigo-identidade.html">
+  <meta property="og:image" content="https://confelipe.github.io/avatar.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Automação Segura de Identidade no Active Directory com TypeScript">
+  <meta name="twitter:description" content="Arquitetura Zero-Trust de middleware para orquestração de identidade e auditoria com Graylog.">
+  <meta name="twitter:image" content="https://confelipe.github.io/avatar.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Automação Segura de Identidade no Active Directory com TypeScript",
+    "description": "Desenvolvimento de middleware em TypeScript para automação segura de identidade e credenciais no Active Directory.",
+    "author": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva",
+      "url": "https://confelipe.github.io",
+      "jobTitle": "Senior Infrastructure & DevOps Engineer"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva"
+    },
+    "datePublished": "2026-01-20",
+    "inLanguage": "pt-BR",
+    "mainEntityOfPage": "https://confelipe.github.io/artigo-identidade.html",
+    "keywords": ["ActiveDirectory", "TypeScript", "LDAPS", "IAM", "ZeroTrust", "DevOps"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="avatar.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand">
+        <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">Início</a>
+        <a href="index.html#about" class="nav-item">Sobre</a>
+        <a href="index.html#skills" class="nav-item">Competências</a>
+        <a href="index.html#experience" class="nav-item">Experiência</a>
+        <a href="repositorios.html" class="nav-item">Repositórios</a>
+        <a href="artigos.html" class="nav-item active-page">Artigos</a>
+        <a href="index.html#education" class="nav-item">Formação</a>
+        <a href="index.html#contact" class="nav-item">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <a href="curriculo-carlos-felipe.pdf" download class="btn btn-outline cv-btn" title="Baixar Currículo em PDF">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Download CV</span>
+        </a>
+        <button class="mobile-toggle icon-btn" id="mobileToggle" aria-label="Abrir menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container article-container">
+        <div class="breadcrumb">
+          <a href="artigos.html"><i class="fa-solid fa-arrow-left"></i> Voltar para Todos os Artigos</a>
+          <span class="breadcrumb-separator">/</span>
+          <span>Automação &amp; Identidade</span>
+        </div>
+
+        <div class="article-header-meta">
+          <span class="article-badge badge-devops"><i class="fa-solid fa-users-gear"></i> Automação &amp; Identidade</span>
+          <span class="article-date"><i class="fa-regular fa-clock"></i> 5 min de leitura</span>
+          <span class="article-date"><i class="fa-regular fa-calendar"></i> Janeiro 2026</span>
+        </div>
+
+        <h1 class="single-article-title">Automação Segura de Identidade no Active Directory com TypeScript</h1>
+        
+        <p class="single-article-subtitle">
+          Arquitetura de middleware para operações sensíveis em múltiplos Domain Controllers (desbloqueio e reset de credenciais), com testes automatizados e esteira de auditoria NIST com Graylog.
+        </p>
+
+        <div class="author-meta-bar">
+          <div class="author-avatar-group">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-mini-img">
+            <div>
+              <span class="author-name">Carlos Felipe Oliveira da Silva</span>
+              <span class="author-role">Senior Infrastructure &amp; DevOps Engineer</span>
+            </div>
+          </div>
+          <div class="article-share-buttons">
+            <button class="btn btn-sm btn-outline" id="copyArticleLink" title="Copiar link do artigo">
+              <i class="fa-solid fa-link"></i> <span>Copiar Link</span>
+            </button>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://confelipe.github.io/artigo-identidade.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Confira%20este%20artigo:%20Automação%20de%20Identidade%20no%20AD%20com%20TypeScript%20https://confelipe.github.io/artigo-identidade.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section article-content-section">
+      <div class="container article-container">
+        <article class="single-article-content">
+          <div class="article-highlight-box">
+            <i class="fa-solid fa-user-lock"></i>
+            <div>
+              <strong>Princípio Zero Trust:</strong> Eliminar credenciais de administrador salvas em scripts operacionais e substituir procedimentos manuais de helpdesk por APIs autenticadas com criptografia TLS/LDAPS e auditoria em tempo real.
+            </div>
+          </div>
+
+          <h2>1. O Gargalo Operacional da Gestão de Acessos</h2>
+          <p>
+            A gestão manual de contas e senhas de usuários representa mais de 40% das demandas recebidas por equipes de suporte de infraestrutura. Além do tempo de resposta elevado para os colaboradores, o processo manual introduz riscos de erros humanos e falta de rastreabilidade formal.
+          </p>
+
+          <h2>2. Arquitetura do Middleware de Identidade</h2>
+          <p>
+            Construímos um serviço em <strong>TypeScript / Node.js</strong> que atua como barramento de execução seguro entre interfaces de autosserviço (portais corporativos e bots autorizados) e a floresta do Active Directory:
+          </p>
+          <ul>
+            <li><strong>Conexão LDAPS Segura:</strong> Comunicação com múltiplos Domain Controllers (DCs) exclusivamente via porta 636 com validação de certificados da CA interna.</li>
+            <li><strong>Failover de Controladores de Domínio:</strong> Caso o DC primário fique indisponível, o pool de conexões redireciona instantaneamente a operação para o nó secundário.</li>
+            <li><strong>Validação de Políticas de Senha:</strong> Verificação prévia de complexidade, histórico e dicionário de senhas antes da submissão ao catálogo.</li>
+          </ul>
+
+          <h2>3. Implementação com Tipagem Estrita e Testes</h2>
+          <p>
+            A tipagem estrita com TypeScript garantiu previsibilidade nas respostas de modificação de atributos LDAP:
+          </p>
+
+          <pre><code>// ldap-service.ts - Operação atômica de reset de credencial
+import ldap from 'ldapjs';
+
+export async function unlockUserAccount(userDn: string, client: ldap.Client): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    const change = new ldap.Change({
+      operation: 'replace',
+      modification: {
+        lockoutTime: '0' // Desbloqueia a conta no Active Directory
+      }
+    });
+
+    client.modify(userDn, change, (err) => {
+      if (err) {
+        return reject(new Error(`Falha ao desbloquear conta ${userDn}: ${err.message}`));
+      }
+      resolve(true);
+    });
+  });
+}</code></pre>
+
+          <h2>4. Testes Automatizados e Auditoria Contínua</h2>
+          <p>
+            A esteira conta com uma suíte de <strong>mais de 68 testes unitários e de integração</strong>, simulando cenários de usuários inexistentes, contas desativadas, falhas de conectividade de rede e injeção de caracteres inválidos.
+          </p>
+          <p>
+            Cada operação concluída emite um evento estruturado para o <strong>Graylog</strong> contendo o ID da requisição, hash do usuário solicitante, timestamp UTC e status da execução.
+          </p>
+
+          <div class="article-callout success">
+            <h4><i class="fa-solid fa-clock"></i> Economia Comprovada de Tempo</h4>
+            <p>
+              A automação eliminou cerca de <strong>15 horas semanais</strong> de trabalho repetitivo do time de sustentação, com resolução instantânea das solicitações e conformidade integral com normas NIST.
+            </p>
+          </div>
+
+          <div class="article-tags-section">
+            <span class="tags-title">Tecnologias &amp; Tags:</span>
+            <div class="tags-list">
+              <span class="tag">#ActiveDirectory</span>
+              <span class="tag">#TypeScript</span>
+              <span class="tag">#LDAPS</span>
+              <span class="tag">#ZeroTrust</span>
+              <span class="tag">#NodeJS</span>
+              <span class="tag">#Graylog</span>
+              <span class="tag">#Automação</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="article-author-card">
+          <div class="author-card-content">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-large-img">
+            <div class="author-bio-wrap">
+              <h3>Carlos Felipe Oliveira da Silva</h3>
+              <p class="author-summary">
+                Senior Infrastructure &amp; DevOps Engineer focado em automação de tarefas críticas, arquiteturas Zero Trust e governança de identidades corporativas.
+              </p>
+              <div class="author-links">
+                <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                  <i class="fa-brands fa-linkedin-in"></i> Conectar no LinkedIn
+                </a>
+                <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="artigos.html" class="btn btn-sm btn-outline">
+                  <i class="fa-solid fa-book-open"></i> Ver Outros Artigos
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+        </a>
+        <p class="footer-tagline">Conectando infraestrutura, segurança e código.</p>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:felipecarlos85@gmail.com" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Carlos Felipe Oliveira da Silva. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

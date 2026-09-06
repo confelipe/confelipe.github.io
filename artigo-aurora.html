@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engenharia do Aurora Hub: Catálogo e Orquestração de 86+ Serviços | Carlos Felipe</title>
+  <meta name="description" content="Estudo de caso do Aurora Hub: desenvolvimento de plataforma de observabilidade, catálogo unificado de infraestrutura, health probing em tempo real e orquestração de microsserviços.">
+  <meta name="author" content="Carlos Felipe Oliveira da Silva">
+  <meta name="keywords" content="Aurora Hub, DevOps, Observabilidade, Health Probing, Node.js, Kubernetes, Docker, Microsserviços, Carlos Felipe">
+  <link rel="canonical" href="https://confelipe.github.io/artigo-aurora.html">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Engenharia do Aurora Hub: Catálogo e Orquestração de 86+ Serviços">
+  <meta property="og:description" content="Como unificar a visualização de inventário, telemetria de portas e integridade de mais de 86 serviços corporativos em uma aplicação resiliente.">
+  <meta property="og:url" content="https://confelipe.github.io/artigo-aurora.html">
+  <meta property="og:image" content="https://confelipe.github.io/avatar.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Engenharia do Aurora Hub: Catálogo e Orquestração de 86+ Serviços">
+  <meta name="twitter:description" content="Arquitetura de health probing distribuído e catálogo de serviços em tempo real.">
+  <meta name="twitter:image" content="https://confelipe.github.io/avatar.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Engenharia do Aurora Hub: Catálogo e Orquestração de 86+ Serviços",
+    "description": "Desenvolvimento do Aurora Hub para catálogo unificado, monitoramento de integridade e orquestração de microsserviços.",
+    "author": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva",
+      "url": "https://confelipe.github.io",
+      "jobTitle": "Senior Infrastructure & DevOps Engineer"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva"
+    },
+    "datePublished": "2026-03-01",
+    "inLanguage": "pt-BR",
+    "mainEntityOfPage": "https://confelipe.github.io/artigo-aurora.html",
+    "keywords": ["AuroraHub", "DevOps", "Observabilidade", "NodeJS", "Kubernetes", "Docker", "Microservices"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="avatar.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand">
+        <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">Início</a>
+        <a href="index.html#about" class="nav-item">Sobre</a>
+        <a href="index.html#skills" class="nav-item">Competências</a>
+        <a href="index.html#experience" class="nav-item">Experiência</a>
+        <a href="repositorios.html" class="nav-item">Repositórios</a>
+        <a href="artigos.html" class="nav-item active-page">Artigos</a>
+        <a href="index.html#education" class="nav-item">Formação</a>
+        <a href="index.html#contact" class="nav-item">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <a href="curriculo-carlos-felipe.pdf" download class="btn btn-outline cv-btn" title="Baixar Currículo em PDF">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Download CV</span>
+        </a>
+        <button class="mobile-toggle icon-btn" id="mobileToggle" aria-label="Abrir menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container article-container">
+        <div class="breadcrumb">
+          <a href="artigos.html"><i class="fa-solid fa-arrow-left"></i> Voltar para Todos os Artigos</a>
+          <span class="breadcrumb-separator">/</span>
+          <span>Observabilidade &amp; Plataforma</span>
+        </div>
+
+        <div class="article-header-meta">
+          <span class="article-badge badge-devops"><i class="fa-solid fa-layer-group"></i> DevOps &amp; Plataforma</span>
+          <span class="article-date"><i class="fa-regular fa-clock"></i> 6 min de leitura</span>
+          <span class="article-date"><i class="fa-regular fa-calendar"></i> Março 2026</span>
+        </div>
+
+        <h1 class="single-article-title">Engenharia do Aurora Hub: Catálogo e Orquestração de 86+ Serviços</h1>
+        
+        <p class="single-article-subtitle">
+          Como construímos uma central unificada de governança de infraestrutura, com health probing em tempo real, streaming de eventos via SSE e catálogo interativo de microsserviços.
+        </p>
+
+        <div class="author-meta-bar">
+          <div class="author-avatar-group">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-mini-img">
+            <div>
+              <span class="author-name">Carlos Felipe Oliveira da Silva</span>
+              <span class="author-role">Senior Infrastructure &amp; DevOps Engineer</span>
+            </div>
+          </div>
+          <div class="article-share-buttons">
+            <button class="btn btn-sm btn-outline" id="copyArticleLink" title="Copiar link do artigo">
+              <i class="fa-solid fa-link"></i> <span>Copiar Link</span>
+            </button>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://confelipe.github.io/artigo-aurora.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Confira%20este%20artigo:%20Engenharia%20do%20Aurora%20Hub%20https://confelipe.github.io/artigo-aurora.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section article-content-section">
+      <div class="container article-container">
+        <article class="single-article-content">
+          <div class="article-highlight-box">
+            <i class="fa-solid fa-network-wired"></i>
+            <div>
+              <strong>Objetivo da Engenharia:</strong> Prover uma "Single Source of Truth" para engenheiros de infraestrutura e suporte, catalogando metadados, portas, status de containers Docker e nós Kubernetes de mais de 86 aplicações corporativas ativas.
+            </div>
+          </div>
+
+          <h2>1. O Desafio: A Complexidade do Crescimento Rápido de Microsserviços</h2>
+          <p>
+            À medida que o parque de serviços se expandiu (bancos de dados MySQL/PostgreSQL, clusters Kafka, instâncias GLPI, pipelines de CI/CD e gateways de comunicação), mapear dependências, URLs e portas em planilhas se tornou inviável e propenso a erros.
+          </p>
+
+          <h2>2. Arquitetura do Aurora Hub</h2>
+          <p>
+            O Aurora Hub foi projetado com arquitetura desacoplada e foco em baixíssima latência:
+          </p>
+          <ul>
+            <li><strong>Backend em Node.js / Express:</strong> Motor assíncrono com cache em memória e persistência de metadados em JSON Schema validado.</li>
+            <li><strong>Módulo de Health Probing:</strong> Varredura paralela não-bloqueante verificando sockets TCP e endpoints HTTP/HTTPS com timeouts inteligentes.</li>
+            <li><strong>Event Streaming (SSE):</strong> Notificações em tempo real enviadas para a interface web via <em>Server-Sent Events</em> sem a sobrecarga de polling constante.</li>
+            <li><strong>Bridge de Automação em Python:</strong> Utilitários auxiliares para geração automatizada de documentação técnica profunda de cada projeto.</li>
+          </ul>
+
+          <h2>3. Motor de Probing Assíncrono e Detecção de Falhas</h2>
+          <p>
+            O mecanismo de verificação foi desenvolvido para testar dezenas de portas simultaneamente sem gerar gargalos de I/O de rede:
+          </p>
+
+          <pre><code>// server.js - Probing assíncrono de integridade de serviços
+const net = require('net');
+
+function probeServiceSocket(host, port, timeoutMs = 1500) {
+  return new Promise((resolve) => {
+    const socket = new net.Socket();
+    let isSettled = false;
+
+    socket.setTimeout(timeoutMs);
+
+    socket.on('connect', () => {
+      isSettled = true;
+      socket.destroy();
+      resolve({ port, status: 'ONLINE', latencyMs: Date.now() - startTime });
+    });
+
+    socket.on('timeout', () => {
+      if (!isSettled) {
+        socket.destroy();
+        resolve({ port, status: 'TIMEOUT', latencyMs: timeoutMs });
+      }
+    });
+
+    socket.on('error', (err) => {
+      if (!isSettled) {
+        socket.destroy();
+        resolve({ port, status: 'OFFLINE', error: err.message });
+      }
+    });
+
+    const startTime = Date.now();
+    socket.connect(port, host);
+  });
+}</code></pre>
+
+          <h2>4. Impacto Operacional e Integração</h2>
+          <p>
+            O Aurora Hub se transformou no portal de referência para todas as operações diárias da equipe técnica:
+          </p>
+          <div class="article-steps-grid">
+            <div class="step-card">
+              <div class="step-icon"><i class="fa-solid fa-list-check"></i></div>
+              <h3>86+ Projetos Indexados</h3>
+              <p>Inventário completo com links diretos, credenciais de teste centralizadas e portas documentadas.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+              <h3>Diagnóstico Instantâneo</h3>
+              <p>Identificação de serviços caídos ou com degradação de tempo de resposta em menos de 2 segundos.</p>
+            </div>
+          </div>
+
+          <div class="article-callout success">
+            <h4><i class="fa-solid fa-check"></i> Conclusão</h4>
+            <p>
+              A consolidação do Aurora Hub reduziu drasticamente o tempo gasto procurando informações de portas e hosts, proporcionando clareza de governança e facilitando a entrada de novos membros no time de engenharia.
+            </p>
+          </div>
+
+          <div class="article-tags-section">
+            <span class="tags-title">Tecnologias &amp; Tags:</span>
+            <div class="tags-list">
+              <span class="tag">#AuroraHub</span>
+              <span class="tag">#DevOps</span>
+              <span class="tag">#NodeJS</span>
+              <span class="tag">#Observabilidade</span>
+              <span class="tag">#Microservices</span>
+              <span class="tag">#Kubernetes</span>
+              <span class="tag">#Docker</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="article-author-card">
+          <div class="author-card-content">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-large-img">
+            <div class="author-bio-wrap">
+              <h3>Carlos Felipe Oliveira da Silva</h3>
+              <p class="author-summary">
+                Senior Infrastructure &amp; DevOps Engineer com ampla experiência na criação de plataformas de gerenciamento de infraestrutura, orquestração e monitoramento distribuído.
+              </p>
+              <div class="author-links">
+                <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                  <i class="fa-brands fa-linkedin-in"></i> Conectar no LinkedIn
+                </a>
+                <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="artigos.html" class="btn btn-sm btn-outline">
+                  <i class="fa-solid fa-book-open"></i> Ver Outros Artigos
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+        </a>
+        <p class="footer-tagline">Conectando infraestrutura, segurança e código.</p>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:felipecarlos85@gmail.com" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Carlos Felipe Oliveira da Silva. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

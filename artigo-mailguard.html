@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mailguard: Proteção e Monitoramento de Fluxo de E-mails Corporativos | Carlos Felipe</title>
+  <meta name="description" content="Engenharia de segurança de e-mails com Mailguard: automação em Python, hardening de Postfix MTA, validação estrita de SPF, DKIM e DMARC e mitigação de phishing.">
+  <meta name="author" content="Carlos Felipe Oliveira da Silva">
+  <meta name="keywords" content="Mailguard, Postfix, DMARC, DKIM, SPF, Email Security, Python, Antispam, SOC, Carlos Felipe">
+  <link rel="canonical" href="https://confelipe.github.io/artigo-mailguard.html">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Mailguard: Proteção e Monitoramento de Fluxo de E-mails Corporativos">
+  <meta property="og:description" content="Como arquitetar uma esteira de segurança para servidores de e-mail Postfix com validação DMARC, análise de reputação e automações defensivas em Python.">
+  <meta property="og:url" content="https://confelipe.github.io/artigo-mailguard.html">
+  <meta property="og:image" content="https://confelipe.github.io/avatar.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mailguard: Proteção e Monitoramento de Fluxo de E-mails Corporativos">
+  <meta name="twitter:description" content="Hardening de Postfix MTA e monitoramento contínuo de entregabilidade e conformidade DMARC.">
+  <meta name="twitter:image" content="https://confelipe.github.io/avatar.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Mailguard: Proteção e Monitoramento de Fluxo de E-mails Corporativos",
+    "description": "Engenharia de segurança para fluxo de mensagens corporativas com Mailguard, Postfix, políticas de SPF/DKIM/DMARC e scripts em Python.",
+    "author": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva",
+      "url": "https://confelipe.github.io",
+      "jobTitle": "Senior Infrastructure & DevOps Engineer"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Carlos Felipe Oliveira da Silva"
+    },
+    "datePublished": "2026-02-22",
+    "inLanguage": "pt-BR",
+    "mainEntityOfPage": "https://confelipe.github.io/artigo-mailguard.html",
+    "keywords": ["Mailguard", "Postfix", "SPF", "DKIM", "DMARC", "Email Security", "Python"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="avatar.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand">
+        <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item">Início</a>
+        <a href="index.html#about" class="nav-item">Sobre</a>
+        <a href="index.html#skills" class="nav-item">Competências</a>
+        <a href="index.html#experience" class="nav-item">Experiência</a>
+        <a href="repositorios.html" class="nav-item">Repositórios</a>
+        <a href="artigos.html" class="nav-item active-page">Artigos</a>
+        <a href="index.html#education" class="nav-item">Formação</a>
+        <a href="index.html#contact" class="nav-item">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <a href="curriculo-carlos-felipe.pdf" download class="btn btn-outline cv-btn" title="Baixar Currículo em PDF">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Download CV</span>
+        </a>
+        <button class="mobile-toggle icon-btn" id="mobileToggle" aria-label="Abrir menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container article-container">
+        <div class="breadcrumb">
+          <a href="artigos.html"><i class="fa-solid fa-arrow-left"></i> Voltar para Todos os Artigos</a>
+          <span class="breadcrumb-separator">/</span>
+          <span>Segurança de E-mail &amp; MTA</span>
+        </div>
+
+        <div class="article-header-meta">
+          <span class="article-badge badge-sec"><i class="fa-solid fa-envelope-shield"></i> Segurança de E-mail &amp; Automação</span>
+          <span class="article-date"><i class="fa-regular fa-clock"></i> 5 min de leitura</span>
+          <span class="article-date"><i class="fa-regular fa-calendar"></i> Fevereiro 2026</span>
+        </div>
+
+        <h1 class="single-article-title">Mailguard: Proteção e Monitoramento de Fluxo de E-mails Corporativos</h1>
+        
+        <p class="single-article-subtitle">
+          Arquitetura para sustentação de servidores Postfix MTA, validação estrita de registros SPF/DKIM/DMARC, relatórios agregados e mitigação automatizada em Python.
+        </p>
+
+        <div class="author-meta-bar">
+          <div class="author-avatar-group">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-mini-img">
+            <div>
+              <span class="author-name">Carlos Felipe Oliveira da Silva</span>
+              <span class="author-role">Senior Infrastructure &amp; DevOps Engineer</span>
+            </div>
+          </div>
+          <div class="article-share-buttons">
+            <button class="btn btn-sm btn-outline" id="copyArticleLink" title="Copiar link do artigo">
+              <i class="fa-solid fa-link"></i> <span>Copiar Link</span>
+            </button>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://confelipe.github.io/artigo-mailguard.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Confira%20este%20artigo:%20Mailguard%20Seguranca%20de%20Emails%20https://confelipe.github.io/artigo-mailguard.html" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" title="Compartilhar no WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section article-content-section">
+      <div class="container article-container">
+        <article class="single-article-content">
+          <div class="article-highlight-box">
+            <i class="fa-solid fa-envelope-circle-check"></i>
+            <div>
+              <strong>Objetivo Principal:</strong> Garantir 100% de integridade no envio e recebimento de mensagens institucionais, protegendo o domínio contra falsificação de identidade (spoofing) e aplicando filtros rigorosos contra ataques de phishing direcionados.
+            </div>
+          </div>
+
+          <h2>1. O Cenário: Riscos de Reputação e Ataques BEC</h2>
+          <p>
+            O correio eletrônico continua sendo o principal vetor de entrada para invasões cibernéticas e golpes de BEC (<em>Business Email Compromise</em>). Servidores de e-mail mal configurados ou sem políticas DMARC em modo <code>reject</code> permitem que atacantes forjem a identidade corporativa para clientes e fornecedores.
+          </p>
+
+          <h2>2. Pilares de Hardening do Postfix MTA</h2>
+          <p>
+            A implementação do Mailguard reestruturou os parâmetros de segurança do Postfix:
+          </p>
+          <ul>
+            <li><strong>Políticas Anti-Relay Rígidas:</strong> Configurações de <code>smtpd_recipient_restrictions</code> com checagem de Reverse DNS (rDNS/PTR) e verificação de HELO/EHLO com regras customizadas.</li>
+            <li><strong>Criptografia Obrigatória em Trânsito (TLS):</strong> Imposição de TLS 1.3 com cifras seguras, impedindo ataques de downgrade (STARTTLS Stripping).</li>
+            <li><strong>Rate Limiting Dinâmico:</strong> Controle por remetente/IP para evitar abuso no envio de mensagens caso uma conta seja temporariamente comprometida.</li>
+          </ul>
+
+          <h2>3. Esteira de Automação de Análise em Python</h2>
+          <p>
+            O módulo central do Mailguard foi desenvolvido em Python para inspecionar filas de entrega, processar relatórios agregados DMARC (RUA) e alertar sobre divergências de alinhamento:
+          </p>
+
+          <pre><code># mailguard_inspector.py - Verificação e auditoria DMARC / SPF
+import smtplib
+import dns.resolver
+from email.policy import default
+from email.parser import BytesParser
+
+def verify_domain_alignment(domain, sender_ip):
+    """Valida se o IP de envio possui autorizacao explicita no registro SPF"""
+    try:
+        answers = dns.resolver.resolve(f"_dmarc.{domain}", "TXT")
+        dmarc_record = [r.to_text() for r in answers if "v=DMARC1" in r.to_text()]
+        
+        spf_answers = dns.resolver.resolve(domain, "TXT")
+        spf_record = [r.to_text() for r in spf_answers if "v=spf1" in r.to_text()]
+        
+        return {
+            "domain": domain,
+            "dmarc_enforced": "p=reject" in str(dmarc_record),
+            "spf_valid": bool(spf_record)
+        }
+    except Exception as err:
+        return {"error": str(err), "domain": domain}</code></pre>
+
+          <h2>4. Monitoramento Contínuo e Integração com SOC</h2>
+          <p>
+            Logs estruturados de conexões rejeitadas e anomalias de envio são encaminhados diretamente ao <strong>Graylog / OpenSearch</strong>. Qualquer tentativa de envio em massa não autorizada gera bloqueio imediato da conta e abertura de ticket operacional.
+          </p>
+
+          <div class="article-callout success">
+            <h4><i class="fa-solid fa-shield-halved"></i> Resultados Obtidos</h4>
+            <p>
+              Reputação de domínio elevada à nota máxima nos principais provedores (Google, Microsoft), índice de entregabilidade acima de 99.8% e eliminação completa de campanhas de spoofing utilizando o domínio corporativo.
+            </p>
+          </div>
+
+          <div class="article-tags-section">
+            <span class="tags-title">Tecnologias &amp; Tags:</span>
+            <div class="tags-list">
+              <span class="tag">#Mailguard</span>
+              <span class="tag">#Postfix</span>
+              <span class="tag">#DMARC</span>
+              <span class="tag">#DKIM</span>
+              <span class="tag">#SPF</span>
+              <span class="tag">#Python</span>
+              <span class="tag">#EmailSecurity</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="article-author-card">
+          <div class="author-card-content">
+            <img src="avatar.png" alt="Carlos Felipe" class="author-large-img">
+            <div class="author-bio-wrap">
+              <h3>Carlos Felipe Oliveira da Silva</h3>
+              <p class="author-summary">
+                Senior Infrastructure &amp; DevOps Engineer especialista em proteção de perímetros, servidores corporativos de mensageria e automação de processos críticos.
+              </p>
+              <div class="author-links">
+                <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                  <i class="fa-brands fa-linkedin-in"></i> Conectar no LinkedIn
+                </a>
+                <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="artigos.html" class="btn btn-sm btn-outline">
+                  <i class="fa-solid fa-book-open"></i> Ver Outros Artigos
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-code">&lt;</span><span class="brand-name">carlos.felipe</span><span class="brand-code">/&gt;</span>
+        </a>
+        <p class="footer-tagline">Conectando infraestrutura, segurança e código.</p>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/cfelipe-oliveira/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/confelipe" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:felipecarlos85@gmail.com" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Carlos Felipe Oliveira da Silva. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
